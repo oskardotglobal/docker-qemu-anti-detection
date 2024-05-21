@@ -10,7 +10,7 @@ RUN set -eu \
     && cd /tmp \
     && git clone https://github.com/zhaodice/qemu-anti-detection.git \
     && wget https://download.qemu.org/qemu-8.2.2.tar.xz \
-    && tar xvJf qemu-8.2.2.tar.xz \
+    && tar -xvJf qemu-8.2.2.tar.xz \
     && cd qemu-8.2.2 \
         && git apply ../qemu-anti-detection/qemu-8.2.0.patch \
         && ./configure \
