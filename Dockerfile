@@ -11,6 +11,7 @@ RUN set -eu \
         xz-utils \
         python3 \
         python3-venv \
+        python3-sphinx \
         libglib2.0-dev \
         libfdt-dev \
         libpixman-1-dev \
