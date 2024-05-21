@@ -10,6 +10,7 @@ RUN set -eu \
         git \
         xz-utils \
         python3 \
+        python3-venv \
         libglib2.0-dev \
         libfdt-dev \
         libpixman-1-dev \
