@@ -28,7 +28,7 @@ jobs:
         uses: docker/setup-qemu-action@v2
         with:
           platforms: ${{ matrix.platform }}
-        if: ${{ matrix.platform != "amd64" }}
+        if: ${{ matrix.platform != 'amd64' }}
 
       - name: Get dates
         id: date
