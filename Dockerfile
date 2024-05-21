@@ -2,9 +2,11 @@ ARG ARCH
 ARG VCS_REF
 ARG BUILD_DATE
 
-FROM ghcr.io/dockur/windows:latest
+FROM ghcr.io/qemus/qemu-docker:5.06
 
 RUN set -eu \
+    && apt-get update \
+    && apt-get install --no-install-recommends -y git \
     && cd /tmp \
     && git clone https://github.com/zhaodice/qemu-anti-detection.git \
     && wget https://download.qemu.org/qemu-8.2.2.tar.xz \
@@ -13,7 +15,5 @@ RUN set -eu \
         && git apply ../qemu-anti-detection/qemu-8.2.0.patch \
         && ./configure \
         && make install -j$(nproc) \
-        && cd .. \
-    && rm -f ./qemu-8.2.2.tar.xz \
-    && rm -rf ./qemu-8.2.2 \
-    && rm -rf ./qemu-anti-detection
+        && cd \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
