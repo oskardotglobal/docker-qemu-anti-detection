@@ -1,9 +1,7 @@
 name: Docker image
 
 on:
-  workflow_dispatch:
-  schedule:
-    
+  workflow_dispatch:    
     
 permissions:
   packages: write
