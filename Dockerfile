@@ -9,6 +9,7 @@ RUN set -eu \
     && apt-get install --no-install-recommends -y \
         git \
         xz-utils \
+        python3 \
     && cd /tmp \
     && git clone https://github.com/zhaodice/qemu-anti-detection.git \
     && wget https://download.qemu.org/qemu-8.2.2.tar.xz \
