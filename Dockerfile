@@ -16,7 +16,7 @@ RUN set -eu \
     && tar -xvJf qemu-8.2.2.tar.xz \
     && cd qemu-8.2.2 \
         && git apply ../qemu-anti-detection/qemu-8.2.0.patch \
-        && ./configure \
+        && ./configure --python "$(which python3)" \
         && make install -j$(nproc) \
         && cd \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
