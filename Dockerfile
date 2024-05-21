@@ -6,7 +6,9 @@ FROM ghcr.io/qemus/qemu-docker:5.06
 
 RUN set -eu \
     && apt-get update \
-    && apt-get install --no-install-recommends -y git \
+    && apt-get install --no-install-recommends -y \
+        git \
+        xz-utils \
     && cd /tmp \
     && git clone https://github.com/zhaodice/qemu-anti-detection.git \
     && wget https://download.qemu.org/qemu-8.2.2.tar.xz \
