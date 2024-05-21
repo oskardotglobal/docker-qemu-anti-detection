@@ -10,13 +10,18 @@ RUN set -eu \
         git \
         xz-utils \
         python3 \
+        libglib2.0-dev \
+        libfdt-dev \
+        libpixman-1-dev \
+        zlib1g-dev \
+        ninja-build \
     && cd /tmp \
     && git clone https://github.com/zhaodice/qemu-anti-detection.git \
     && wget https://download.qemu.org/qemu-8.2.2.tar.xz \
     && tar -xvJf qemu-8.2.2.tar.xz \
     && cd qemu-8.2.2 \
         && git apply ../qemu-anti-detection/qemu-8.2.0.patch \
-        && ./configure --python "$(which python3)" \
+        && PYTHON="$(which python3)" ./configure \
         && make install -j$(nproc) \
         && cd \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
