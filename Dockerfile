@@ -12,6 +12,7 @@ RUN set -eu \
         python3 \
         python3-venv \
         python3-sphinx \
+        python3-sphinx-rtd-theme \
         libglib2.0-dev \
         libfdt-dev \
         libpixman-1-dev \
