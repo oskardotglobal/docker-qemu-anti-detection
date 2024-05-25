@@ -4,6 +4,11 @@ ARG BUILD_DATE
 
 FROM ghcr.io/qemus/qemu-docker:5.06
 
+RUN mv /bin/uname /bin/uname-host
+COPY uname /bin/uname
+COPY uname.txt /etc/uname.txt
+RUN chmod a+x /bin/uname
+
 RUN set -eu \
     && apt-get update \
     && apt-get install --no-install-recommends -y \

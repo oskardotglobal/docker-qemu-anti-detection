@@ -1,0 +1,64 @@
+#!/bin/bash
+# -*- mode: sh -*-
+
+IFS=$'\n'
+
+declare -A fu
+fake_uname=$(</etc/uname.txt)
+let i=0
+for entry in $fake_uname; do
+    fu[$i]=$entry
+    let i=$i+1
+done
+
+if [ ${#fu} -eq 5 ]; then
+    fu[7]=${fu[5]}
+    fu[5]="unknown"
+    fu[6]="unknown"
+fi
+
+if [ ${#fu} -eq 6 ]; then
+    fu[7]=${fu[6]}
+    fu[6]="unknown"
+fi
+
+if [ $# -eq 0 ]; then
+    echo ${fu[0]}
+else
+    arg=$1
+    case $arg in
+        -a)
+            echo $fake_uname
+            ;;
+        --all)
+            echo $fake_uname
+            ;;
+        -s)
+            echo ${fu[0]}
+            ;;
+        -n)
+            echo ${fu[1]}
+            ;;
+        -r)
+            echo ${fu[2]}
+            ;;
+        -v)
+            echo ${fu[3]}
+            ;;
+        -m)
+            echo ${fu[4]}
+            ;;
+        -p)
+            echo ${fu[5]}
+            ;;
+        -i)
+            echo ${fu[6]}
+            ;;
+        -o)
+            echo ${fu[7]}
+            ;;
+        *)
+            echo error
+        ;;
+    esac
+fi
