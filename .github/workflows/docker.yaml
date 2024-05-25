@@ -1,16 +1,16 @@
 name: Docker image
 
 on:
-  workflow_dispatch:    
+  release:
+    types: [published]
     
 permissions:
   packages: write
+  attestations: write
 
 env:
-  IMAGE_NAME: qemu-docker-anti-detection
-  IMAGE_REGISTRY: ghcr.io/winapps-org
-  REGISTRY_USER: actions
-  REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+  IMAGE_REGISTRY: ghcr.io
+  IMAGE_NAME: winapps-org/qemu-docker-anti-detection
     
 jobs:
   build:
@@ -36,12 +36,19 @@ jobs:
           echo "build=$(date --rfc-3339 ns)" >> $GITHUB_OUTPUT   
           echo "tag=$(date +%Y%m%d)" >> $GITHUB_OUTPUT   
 
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
       - name: Build image
         id: base
         uses: redhat-actions/buildah-build@v2
         with:
           image: ${{ env.IMAGE_NAME }}
-          tags: ${{ steps.date.outputs.tag }} latest
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels 
           context: .
           platforms: linux/${{ matrix.platform }}
           containerfiles: |
@@ -57,5 +64,12 @@ jobs:
           image: ${{ steps.base.outputs.image }}
           tags: ${{ steps.base.outputs.tags }}
           registry: ${{ env.IMAGE_REGISTRY }}
-          username: ${{ env.REGISTRY_USER }}
-          password: ${{ env.REGISTRY_PASSWORD }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate artifact attestation
+        uses: actions/attest-build-provenance@v1
+        with:
+          subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}
+          subject-digest: ${{ steps.push.outputs.digest }}
+          push-to-registry: true
