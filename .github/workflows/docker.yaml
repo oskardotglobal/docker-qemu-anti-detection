@@ -48,7 +48,7 @@ jobs:
         with:
           image: ${{ env.IMAGE_NAME }}
           tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels 
+          labels: ${{ steps.meta.outputs.labels }}
           context: .
           platforms: linux/${{ matrix.platform }}
           containerfiles: |
