@@ -30,4 +30,14 @@ RUN set -eu \
         && PYTHON="$(which python3)" ./configure \
         && make install -j$(nproc) \
         && cd \
+    && apt-get remove -y \
+        git \
+        python3 \
+        python3-venv \
+        python3-sphinx \
+        python3-sphinx-rtd-theme \
+        ninja-build \
+        build-essential \
+        flex \
+        bison \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
