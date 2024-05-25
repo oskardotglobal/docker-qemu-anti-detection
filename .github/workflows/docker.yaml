@@ -7,9 +7,9 @@ permissions:
   packages: write
 
 env:
-  IMAGE_NAME: pufferpanel
-  IMAGE_REGISTRY: ghcr.io/oskardotglobal
-  REGISTRY_USER: oskardotglobal
+  IMAGE_NAME: qemu-docker-anti-detection
+  IMAGE_REGISTRY: ghcr.io/winapps-org
+  REGISTRY_USER: actions
   REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
     
 jobs:
