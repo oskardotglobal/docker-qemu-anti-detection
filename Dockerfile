@@ -19,6 +19,8 @@ RUN set -eu \
         zlib1g-dev \
         ninja-build \
         build-essential \
+        flex \
+        bison \
     && cd /tmp \
     && git clone https://github.com/zhaodice/qemu-anti-detection.git \
     && wget https://download.qemu.org/qemu-8.2.2.tar.xz \
